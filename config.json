@@ -1,0 +1,12 @@
+{
+  "port" : 3000,
+  "mongoose": {
+    "uri": "mongodb://127.0.0.1/mydb"
+  },
+  "session": {
+    "secret": "GNAVPN",
+    "name":"sid"
+
+  },
+  "root":"localhost"
+}

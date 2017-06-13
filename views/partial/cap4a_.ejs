@@ -1,0 +1,5 @@
+<%if(user==null || (user!=null && user.status!='a')){%>
+<input type="text" name="captcha" id="captcha">
+<img id="cap4a" src="/kaptcha.png">
+<img src="/technical_images/Reload-icon.png" width="70px" height="70px" onclick="$('#cap4a').attr('src', $('#cap4a').attr('src') + '?' + Math.random());">
+<%}%>

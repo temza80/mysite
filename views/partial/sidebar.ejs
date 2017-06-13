@@ -1,0 +1,61 @@
+<!-- Sidebar -->
+<div id="sidebar">
+
+    <!-- Logo -->
+    <h1 id="logo"><a href="/posts">Главная</a></h1>
+
+    <!-- Nav -->
+    <nav id="nav">
+    <div id="tag_sky"></div>
+        <ul>
+            <li class="current"><a href="#">Описание</a></li>
+            <li><a href="#">Правила</a></li>
+            <li><a href="#">Обо мне</a></li>
+            <li><a href="#">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <!-- Search -->
+    <section class="box search">
+        <form method="post" action="#">
+            <input type="text" class="text" name="search" placeholder="Search" />
+        </form>
+    </section>
+
+    <!-- Text -->
+    <section class="box text-style1">
+        <div class="inner">
+            <p>
+                <strong>Инфо:</strong> Сайт принадлежит AnnaMaka<a href="mailto:">Написать</a>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Recent Posts -->
+
+
+    <!-- Recent Comments -->
+    <section class="box recent-comments">
+        <header>
+            <h2>Последние комментарии</h2>
+        </header>
+        <ul>
+            <%  for(i=0;i<lastComments.length;i++){%>
+
+            <li><a href="/post/<%=lastComments[i].post_id%>/#comment_<%=lastComments[i]._id%>"><%var comtease=lastComments[i].post.substring(0,70)+'...'%><%=comtease%>.</a></li>
+            <%}%>
+        </ul>
+    </section>
+    <section class="box calendar">
+    <%- include calendar.ejs %>
+    </section>
+    <!-- Calendar -->
+
+    </section>
+
+    <!-- Copyright -->
+    <ul id="copyright">
+        <li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+    </ul>
+
+</div>

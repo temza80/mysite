@@ -1,0 +1,21 @@
+<%if(user==null || (user!=null && user.status!='a')){%>
+
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+
+
+<script type="text/javascript">
+    var onloadCallback = function() {
+        grecaptcha.render('cap4a', {
+            'sitekey' : '6LcsaBYUAAAAAHw-7aO2nq6krFubkLoVChhipEDW'
+        });
+    };
+</script>
+
+
+
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+</script>
+
+<%}%>

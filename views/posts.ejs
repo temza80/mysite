@@ -1,0 +1,79 @@
+
+
+
+<%  layout('/layout/layout')  %>
+<%- include partial/header.ejs %>
+<body class="left-sidebar">
+
+<%var months=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];%>
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Content -->
+    <div id="content">
+        <div class="inner">
+            <%  for(i=0;i<data.length;i++){%>
+            <!-- Post -->
+            <article class="box post post-excerpt">
+                <header>
+
+                    <h2><a href='/post/<%= data[i]._id%>' id="post_start<%= data[i]._id%>"><%= data[i].title%></a></h2>
+                    <p> </p>
+                </header>
+                <div class="info">
+
+                    <span class="date"><span class="month"> <%= months[data[i].modified.getMonth()]%><span>y</span></span> <span class="day"><%= data[i].modified.getDate()%></span><span class="year">, <%= data[i].modified.getFullYear()%></span></span>
+                    <!--
+                        Note: You can change the number of list items in "stats" to whatever you want.
+                    -->
+                    <ul class="stats">
+                 
+                        <li><a href="#" class="icon fa-heart" id="fa_likes<%= data[i]._id%>" onclick="get_likes('<%= data[i]._id%>',event)"><%= data[i].likes%></a></li>
+                    
+                    </ul>
+                </div>
+                <div id="teaser_<%= data[i]._id%>" class="blog_post" >
+
+
+
+                    <%-data[i].teaser%>
+
+
+
+                </div>
+
+                <div id="fulltext_<%= data[i]._id%>" class="blog_post"></div>
+                <div class='underpost_panel'>
+
+                <%data[i].tags.forEach(function(item, i, arr) {
+ %>
+  <a href='/posts/tag/<%-item%>'><%-item%></a> 
+<%})%>
+
+               <br><br>
+
+
+                    <a href='<%= data[i]._id%>' id='load_full_text' class='underpost_links' onclick="load_full_text(this,event)">Читать текст полностью</a>
+                    <a href='/post/<%= data[i]._id%>' class='underpost_links'>Комментарии</a>
+                    <%if(user!=null && user.status=='a'){%>  <a href='/delpost/<%=data[i]._id%>/<%=offset%>'class='underpost_links'>Удалить</a>
+                    <a href='/postredpost/<%=data[i]._id%>'class='underpost_links'>Редакировать</a><%}%>
+                </div>
+
+
+            </article>
+
+            <%}%>
+
+            <%- include partial/pagination.ejs %>
+
+        </div>
+        <%if(user!=null && user.status=='a'){%>
+                 <%- include partial/wysiwyg.ejs %>
+        <%}%>
+
+    </div>
+
+    <%- include partial/sidebar.ejs %>
+
+</div>
+</body>

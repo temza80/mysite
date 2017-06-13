@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+   <%if((typeof page)!='undefined') var title=page.title; else var title='Сайт AnnaMaka'; %> 
+<title><%-title%></title>
+
+ 
+    <link href="/stylesheets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/jquery-3.1.1.js"></script>
+
+    <script src="/javascripts/post_javascript.js"></script>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+
+
+       <link rel="stylesheet" href="/site/css/skel.css" />
+        <link rel="stylesheet" href="/site/css/style.css" />
+        <link rel="stylesheet" href="/site/css/style-desktop.css" />
+        <link rel="stylesheet" href="/site/css/style-wide.css" />
+
+</head>
+
+<%- body %>
+
+</html>

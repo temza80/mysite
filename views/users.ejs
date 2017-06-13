@@ -1,0 +1,58 @@
+
+
+
+<%  layout('/layout/layout')  %>
+<%- include partial/header.ejs %>
+<body class="left-sidebar">
+
+<%var months=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];%>
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <div id='tags_content' style='position:relative; width:75%; margin-left:15em;'>
+    
+       
+                   
+     <div class="row" >
+
+    <div class="col-xs-2">Пользователь</div>
+    <div class="col-xs-8">Комментарии</div>
+    <div class="col-xs-1">Удалить все</div>
+    <div class="col-xs-1">Оставить комменнтарии</div>
+    </div>
+  <hr  color='black'  size='1px'>
+
+     
+        
+            <%  for(i=0;i<users.length;i++){%>
+         
+     <div class="row"  >
+    <div class="col-xs-2" >
+                    <h2><a href='/users/info/<%= users[i].username%>' class='mylinks' id="user_<%= users[i]._id%>"><%= users[i].username%></a></h2></div>
+    <div class="col-xs-8"  >
+Кнопка подгрузить  комментарии через аякс а при удалении обессылить регекспами
+<div id='user_comments<%-users[i]._id%>'></div>
+<button onclick="userComments('<%-users[i]._id%>')">Показать комментарии</button>
+</div>
+    <div class="col-xs-1"><a href='/deluser/all/<%-users[i]._id%>'>УДАЛИТЬ</a></div>
+    <div class="col-xs-1"><a href='/deluser/savecom/<%-users[i]._id%>'>УДАЛИТЬ</a></div>
+   </div>
+                
+                
+                
+             <hr  color='black'  size='1px'>
+              
+    
+
+
+            
+
+            <%}%>
+
+</div>
+      
+</div>
+    <%- include partial/sidebar.ejs %>
+
+</div>
+</body>

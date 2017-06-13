@@ -1,0 +1,4 @@
+<% if(user) {%>
+<li><%= user %></li>
+<li><a href="" onclick="$('<form method=POST action=/logout>').submit(); return false;">Выйти</a></li>
+<% } %>

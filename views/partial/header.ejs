@@ -1,0 +1,4 @@
+
+<%if(user){%> <div id="username_div" class="button">Привет, <%-user.sign%>.<a href="/logout">Валим</a></div><%}%>
+<%if(unemail){%> <div id="username_div" class="button">Адрес <%=unemail%> не подтвержден.<a href="#" id="resend_email" onclick="resend_email('<%=unemail%>')">Переслать подтверждающий код</a></div><%}%>
+<%if(user==null && unemail==null){%> <div id="username_div" class="button"><a href="/login">Вход</a></div>  <%}%>

@@ -1,0 +1,37 @@
+<%function closetags(str,re) {
+    console.log('str='+str);
+    // var re = /[<i>|</i>]/g;
+    var open={};
+    open['<i>']=open['<s>']=open['<b>']=0;
+
+
+    while ((match =re.exec(str)) != null) {
+
+        if(match[0].indexOf('/')==-1){
+            open[match[0]]++;
+
+        }
+
+        else if(match[0].indexOf('/')!=-1)
+        {
+
+            var tag='<'+match[0].slice(2);
+
+            if(typeof open[tag]!='undefined' && open[tag]>0) open[tag]--;
+        }
+
+    }
+
+    for(var ArrVal in open) {
+
+        if(open[ArrVal]>0) {
+            var closetag='</'+ArrVal.slice(1);
+            for (li=0;li<open[ArrVal];li++) {str+=closetag;}
+        }
+
+    }
+
+
+
+    return str;
+}%>

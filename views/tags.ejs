@@ -1,0 +1,57 @@
+
+
+
+<%  layout('/layout/layout')  %>
+<%- include partial/header.ejs %>
+<body class="left-sidebar">
+
+<%var months=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];%>
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <div id='tags_content' style='position:relative; width:50%; margin-left:15em;'>
+    
+       
+                   
+     <div class="row" >
+
+    <div class="col-xs-1">Тег</div>
+    <div class="col-xs-8">Где используется</div>
+    <div class="col-xs-1">Вес</div>
+    <div class="col-xs-2">Удалить</div>
+    </div>
+  <hr  color='black'  size='1px'>
+
+     
+        
+            <%  for(i=0;i<tags.length;i++){%>
+         
+     <div class="row"  >
+    <div class="col-xs-1" >
+                    <h2><a href='/posts/tag/<%= tags[i].tag%>' class='mylinks' id="tag_<%= tags[i]._id%>"><%= tags[i].tag%></a></h2></div>
+    <div class="col-xs-8"  >
+<%if(tags[i].posts)tags[i].posts.forEach(function(item,i,arr){%>
+
+    <%-item%> <%})%></div>
+    <div class="col-xs-1"><%=tags[i].weight%></div>
+    <div class="col-xs-2"><h2><a href='/deltags/<%= tags[i]._id%>'>УДАЛИТЬ</a></h2></div>
+   </div>
+                
+                
+                
+             <hr  color='black'  size='1px'>
+              
+    
+
+
+            
+
+            <%}%>
+
+</div>
+      
+</div>
+    <%- include partial/sidebar.ejs %>
+
+</div>
+</body>

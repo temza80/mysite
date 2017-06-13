@@ -1,0 +1,50 @@
+<!-- Pagination -->
+<%if (count>=11){%>
+<div class="pagination">
+    <!--<a href="#" class="button previous">Previous Page</a>-->
+    <div class="pages">
+
+
+        <%var  current_page=Math.floor(offset/10)+1;
+        var last_page;
+        if(count%10==0) last_page=count/10;
+        else last_page=Math.floor(count/10)+1;
+
+        var start_page=1; if(current_page>=4) start_page=current_page-1;//а будет не ++ а разделить на 10+1 - целое значение а там минус 1 и умножить на 10
+        if(current_page+2>=last_page && last_page>=5) start_page=last_page-3;
+
+
+        %>
+
+
+        <%if (start_page>=3){%>
+        <a href="<%=pagelink%>1">1</a>
+        <span>&hellip;</span>
+        <%for(i=start_page;i<(start_page+3);i++){%>
+        <a href="<%=pagelink%><%=i%>"  <%if(i==current_page){%>class="active"<%}%>><%=i%></a>
+        <%}%>
+        <%if((start_page+3)==last_page){%>
+        <a href="<%=pagelink%><%-last_page%>" <%if(i==current_page){%> class="active"<%}%>><%-last_page%></a>
+
+        <%}%>
+        <%if((start_page+3)<last_page) {%>
+        <span>&hellip;</span>
+        <a href="<%=pagelink%><%-last_page%>" <%if(i==current_page){%> class="active"<%}%>><%-last_page%></a>
+
+        <%}%>
+        <%}%>
+        <%
+            var prelast_page=4;
+        if(last_page<=4) prelast_page=last_page-1;
+        if(start_page>0 && start_page<3 ){%>
+        <%for(i=1;i<=prelast_page;i++){%>
+        <a href="<%=pagelink%><%=i%>"<%if(i==current_page){%> class="active"<%}%> ><%=i%></a>
+        <%}%>
+        <%if(last_page>5){%> <span>...</span><%}%>
+     <%if(last_page!=0){%>   <a href="<%=pagelink%><%-last_page%>" <%if(i==current_page){%> class="active"<%}%>><%-last_page%></a><%}%>
+        <%}%>
+
+    </div>
+    <%if(last_page!=0 && (current_page+1)<=last_page){%>   <a href="<%=pagelink%><%=current_page+1%>" class="button next">Next Page</a><%}%>
+</div>
+<%}%>
