@@ -1,116 +1,105 @@
 <%  layout('/layout/layout')  %>
-<%function closetags(str,tag,closetag,re) {
+    <%function closetags(str,tag,closetag,re) {
     // var re = /[<i>|</i>]/g;
     var open=0;
-
-
     while ((match =re.exec(str)) != null) {
         console.log(match[0]);
         if(match[0]==tag && open==0) open=1;
         else if(match[0]==tag && open==1)
         {
             str = str.substr(0, match.index) +closetag+str.substr(match.index);
-
-
         }
         else if(match[0]==closetag && open==1) open=0;
-
-
     }
     if(open==1) str+=closetag;
     console.log(str);
     return str;
 }%>
 
-<body class="left-sidebar">
+        <body class="left-sidebar">
 
-<%var months=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];%>
+            <%var months=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];%>
 
-<div id="wrapper">
+                <div id="wrapper">
 
-    <!-- Content -->
-    <div id="login-content">
+                    <!-- Content -->
+                    <div id="login-content">
 
-<%if(typeof target!='undefined' && (target=='register' || target=='login')){%>
-            <form id="login">
-                <h1><%=formTitle%></h1>
-                <fieldset id="inputs">
-                    <input id="username_" name="username" type="text" placeholder="Логин" autofocus required>
-                    <input id="password_" name="password" type="password" placeholder="Пароль" required>
-                    <%if(target=='register'){%>  <input id="email_" type="email"  name="email" placeholder="Эл. почта" required><%}%>
-                </fieldset>
-                <fieldset id="actions">
-                    <input type="submit" id="submit" value=<%if(target=='login'){%>"ВОЙТИ"<%}%>
-                    <%if(target=='register'){%>"Регистрация"<%}%>>
-                    <%if(target=='login'){%>   <a href="">Забыли пароль?</a><a href="/register">Регистрация</a><%}%>
-                </fieldset>
-                <fieldset id="kap4a_set">
-
-                <%- include partial/cap4a.ejs %>
-               <br> Войти с помощью социальных сетей<a href="/auth/vkontakte"><img src="../technical_images/vkontakte-120x120.png" width="25%" height="25%"></a>
-                </fieldset>
-            </form>
-
-<%}%>
-
-<%if(typeof message!='undefined'){%> <%-message%><%}%>
-
-    </div>
-    <%- include partial/sidebar.ejs %>
-
-</div>
-</body>
-<<%if(typeof target!='undefined' && (target=='emailValidate' || target=='login' || target=='register')){%>
-<script>
-    $(document.forms['login']).on('submit',function() {
-        var form = $(this);
-       // alert(form.serialize());
-        var data = new FormData();
-        data.append('username', $('#username_').val());
-        data.append('password', $('#password_').val());
-        <%if(target=='register'){%> data.append('email',$('#email_').val());<%}%>
-      data.append('captcha',$('#captcha').val());
-
-        $.post({
-
-            url:"<%-scriptUrl%>",
-            method:'POST',
-           // dataType: "json",
-            //contentType: "application/json; charset=UTF-8",
-            type: 'POST',
-            processData: false, // important
-            contentType: false, // important
-            data: data,
-                /*JSON.stringify({captcha:$('#captcha').val(),username: $('#username_').val(), password: $('#password_').val()
+                        <%if(typeof target!='undefined' && (target=='register' || target=='login')){%>
+                            <form id="login">
+                                <h1>
+                                    <%=formTitle%>
+                                </h1>
+                                <fieldset id="inputs">
+                                    <input id="username_" name="username" type="text" placeholder="Логин" autofocus required>
+                                    <input id="password_" name="password" type="password" placeholder="Пароль" required>
+                                    <%if(target=='register'){%> <input id="email_" type="email" name="email" placeholder="Эл. почта" required>
+                                        <%}%>
+                                </fieldset>
+                                <fieldset id="actions">
+                                    <input type="submit" id="submit" value=<%if(target=='login' ){%>"ВОЙТИ"
+                                    <%}%>
+                                        <%if(target=='register'){%>"Регистрация"
+                                            <%}%>>
+                                                <%if(target=='login'){%> <a href="">Забыли пароль?</a><a href="/register">Регистрация</a>
+                                                    <%}%>
+                                </fieldset>
+                                <fieldset id="kap4a_set">
+                                    <%- include partial/cap4a.ejs %>
+                                        <br> Войти с помощью социальных сетей<a href="/auth/vkontakte"><img src="../technical_images/vkontakte-120x120.png" width="25%" height="25%"></a>
+                                </fieldset>
+                            </form>
+                            <%}%>
+                                <%if(typeof message!='undefined'){%>
+                                    <%-message%>
+                                        <%}%>
+                    </div>
+                    <%- include partial/sidebar.ejs %>
+                </div>
+        </body>
+        <<%if(typeof target!='undefined' && (target=='emailValidate' || target=='login' || target=='register' )){%>
+            <script>
+                $(document.forms['login']).on('submit', function() {
+                    var form = $(this);
+                    // alert(form.serialize());
+                    var data = new FormData();
+                    data.append('username', $('#username_').val());
+                    data.append('password', $('#password_').val());
+                    <%if(target=='register'){%>
+                    data.append('email', $('#email_').val());
+                    <%}%>
+                    data.append('captcha', $('#captcha').val());
+                    $.post({
+                        url: "<%-scriptUrl%>",
+                        method: 'POST',
+                        // dataType: "json",
+                        //contentType: "application/json; charset=UTF-8",
+                        type: 'POST',
+                        processData: false, // important
+                        contentType: false, // important
+                        data: data,
+                        /*JSON.stringify({captcha:$('#captcha').val(),username: $('#username_').val(), password: $('#password_').val()
               //  <%if(target=='register'){%>, email: $('#email_').val()<%}%>}),*/
-         //  data: form.serialize(),
-            success: function(data, textStatus, xhr) {
-              if(data!='ok')  alert(data);
-              else { window.location.href = '<%=winHref%>'}
-            },
-
-
-
-            // important
-
-            complete: function() {
-
-
-            },
-           /* statusCode: {
-                200: function () {
-
-                    window.location.href = '<%=winHref%>'
-                },
-                403: function (jqXHR) {
-                    var error = JSON.parse(jqXHR.responseText);
-                    $('.error', form).html(error.mesage);
-                }
-            }*/
-        });
-        return false;
-    });
-
-
-</script>
-<%}%>
+                        //  data: form.serialize(),
+                        success: function(data, textStatus, xhr) {
+                            if (data != 'ok') alert(data);
+                            else {
+                                window.location.href = '<%=winHref%>'
+                            }
+                        },
+                        // important
+                        complete: function() {},
+                        /* statusCode: {
+                             200: function () {
+                                 window.location.href = '<%=winHref%>'
+                             },
+                             403: function (jqXHR) {
+                                 var error = JSON.parse(jqXHR.responseText);
+                                 $('.error', form).html(error.mesage);
+                             }
+                         }*/
+                    });
+                    return false;
+                });
+            </script>
+            <%}%>
