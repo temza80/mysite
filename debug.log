@@ -1,1 +1,142 @@
+var passport       = require('passport');
+var LocalStrategy  = require('passport-local').Strategy;
 
+mysql = require('mysql'),
+   
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '1',
+    database: 'auth'
+});
+connection.connect();
+var findQuery="SELECT * FROM auth WHERE username=?";
+var insertQuery="INSERT INTO  `auth`  SET ?";
+"INSERT INTO `user` SET ?",
+    insertValues = {
+              username: 'Ivan',
+              password: 'Ivanov',
+              email: file
+                        };
+/*connection.query(query, values, callback);
+= ?", [username]
+* 
+* 
+* const makeRequest = async () => {
+  const value1 = await promise1()
+  const value2 = await promise2(value1)
+  return promise3(value1, value2)
+}
+* 
+*  User.findOne({ username : username},function(err,user){
+    return err 
+      ? done(err)
+      : user
+        ? password === user.password
+          ? done(null, user)
+          : done(null, false, { message: 'Incorrect password.' })
+        : done(null, false, { message: 'Incorrect username.' });
+  });
+}));
+try {
+    // парсинг JSON может вызвать ошибку
+    const data = JSON.parse(await getJSON())
+    console.log(data)
+  } catch (err) {
+    console.log(err)
+  }
+* */
+function(err,rows){	
+			done(err, rows[0]);
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
+bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+  bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
+    // res == true
+});
+});
+
+module.exports=function(app){
+
+
+app.use(express.cookieParser());
+app.use(express.bodyParser());
+app.use(express.session({ secret: 'SECRET' }));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password'
+}, function(username, password,done){
+User.findOne({ username : username},function(err,user){
+  if(err) done(err);
+  else  if(!raws.length) done(null,"false",{ message: 'Incorrect username.' })
+  else bcrypt.compare(myPlaintextPassword, raws[0].password, function(err, res) {
+      ? done(err)
+      : user
+        ? password === user.password
+          ? done(null, user)
+          : done(null, false, { message: 'Incorrect password.' })
+        : done(null, false, { message: 'Incorrect username.' });
+  });
+}));
+
+passport.serializeUser(function(user, done) {
+	
+	
+    done(null, user.doc._id);
+});
+
+passport.deserializeUser(function(id, done) {
+;
+   socLogin.findById(id)
+        .then(function (user) { done(null, user); })
+        .catch(done);
+});
+app.post('/auth/vkontakte', passport.authenticate('vkontakte'));
+
+app.get('/auth/vkontakte/callback',
+  passport.authenticate('vkontakte', {
+    successRedirect: '/',
+    failureRedirect: '/login' 
+  })
+);
+}
+
+
+
+
+module.exports.login = function(req, res, next) {
+  passport.authenticate('local',
+    function(err, user, info) {
+      return err 
+        ? next(err)
+        : user
+          ? req.logIn(user, function(err) {
+              return err
+                ? next(err)
+                : res.redirect('/private');
+            })
+          : res.redirect('/');
+    }
+  )(req, res, next);
+};
+
+module.exports.logout = function(req, res) {
+  req.logout();
+  res.redirect('/');
+};
+
+
+module.exports.register = function(req, res, next) {
+  var user = new User({ username: req.body.email, password: req.body.password});
+  user.save(function(err) {
+    return err
+      ? next(err)
+      : req.logIn(user, function(err) {
+        return err
+          ? next(err)
+          : res.redirect('/private');
+      });
+  });
+};
